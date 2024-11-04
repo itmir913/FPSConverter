@@ -16,8 +16,8 @@ VERSION = "2024.11.04."
 def process_file(file_path):
     try:
         df = pd.read_excel(file_path)
-        fps = ET.Element('fps', version="1.2", url="https://github.com/zhblue/freeproblemset/")
-        generator = ET.SubElement(fps, 'generator', name="HUSTOJ", url="https://github.com/zhblue/hustoj/")
+        fps = ET.Element('CSLfps', version="1.2", url="https://github.com/zhblue/freeproblemset/")
+        generator = ET.SubElement(fps, 'generator', name="CSL", url="https://github.com/melongist/CSL/tree/master/HUSTOJ/")
 
         current_item = None
         for index, row in df.iterrows():
@@ -79,7 +79,7 @@ def process_file(file_path):
 
         base_name = os.path.splitext(os.path.basename(file_path))[0]
         output_directory = os.path.dirname(file_path)
-        output_file_name = os.path.join(output_directory, f"{base_name}_fps_output.xml")
+        output_file_name = os.path.join(output_directory, f"{base_name}_cslfps_output.xml")
 
         xml_str = ET.tostring(fps, encoding='utf-8', xml_declaration=True)
         formatted_xml = minidom.parseString(xml_str).toprettyxml(indent="    ")
@@ -113,7 +113,7 @@ def show_program_info():
         f"Made by: {AUTHOR}\n"
         f"Version: {VERSION}\n"
         "\n"
-        "FPS Converter 프로그램은 엑셀 파일로 작성된 온라인 저지 문제를 fps.xml 파일로 변환하는 프로그램입니다.\n"
+        "CSLFPS Converter 프로그램은 엑셀 파일로 작성된 온라인 저지 문제를 fps.xml 파일로 변환하는 프로그램입니다.\n"
         "\n"
         "이 프로그램은 LGPL-2.1 라이선스 하에 배포되며, 자유롭게 사용 및 수정할 수 있습니다."
     )
@@ -126,7 +126,7 @@ def open_github():
 
 # Create main window
 root = tkdnd2.Tk()  # Changed to initialize TkinterDnD
-root.title("Excel to Fps.xml Converter")
+root.title("Excel to CSLfps.xml Converter")
 root.geometry("500x300")
 
 label = tk.Label(root, text="Drag and drop your Excel file here", pady=100, padx=50)
