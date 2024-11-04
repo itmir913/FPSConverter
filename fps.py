@@ -83,6 +83,7 @@ def process_file(file_path):
 
         xml_str = ET.tostring(fps, encoding='utf-8', xml_declaration=True)
         formatted_xml = minidom.parseString(xml_str).toprettyxml(indent="    ")
+        formatted_xml = formatted_xml.replace("&lt;![CDATA[", "<![CDATA[").replace("]]&gt;", "]]>")
 
         with open(output_file_name, "w", encoding="utf-8") as fh:
             fh.write(formatted_xml)
