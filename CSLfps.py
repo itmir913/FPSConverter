@@ -31,7 +31,7 @@ def process_file(file_path):
                 time_limit.text = f"<![CDATA[{int(row['time_limit'])}]]>"
 
                 memory_limit = ET.SubElement(current_item, 'memory_limit', unit="mb")
-                memory_limit.text = f"<![CDATA[{row['memory_limit']}]]>"
+                memory_limit.text = f"<![CDATA[{int(row['memory_limit'])}]]>"
 
                 description = ET.SubElement(current_item, 'description')
                 description.text = f"<![CDATA[{row['description']}]]>"
