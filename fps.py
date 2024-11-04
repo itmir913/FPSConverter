@@ -34,7 +34,7 @@ def process_file(file_path):
                 memory_limit.text = f"<![CDATA[{row['memory_limit']}]]>"
 
                 description = ET.SubElement(current_item, 'description')
-                description.text = f"<![CDATA[{str(row['description']).replace('\n', '<br>')}]]>"
+                description.text = f"<![CDATA[{row['description']}]]>"
 
                 input_data = ET.SubElement(current_item, 'input')
                 input_data.text = f"<![CDATA[{row['input']}]]>"
@@ -49,10 +49,10 @@ def process_file(file_path):
                 sample_output.text = f"<![CDATA[{row['sample_output']}]]>"
 
                 hint = ET.SubElement(current_item, 'hint')
-                hint.text = f"<![CDATA[{str(row['hint']).replace('\n', '<br>')}]]>"
+                hint.text = f"<![CDATA[{row['hint']}]]>"
 
                 source = ET.SubElement(current_item, 'source')
-                source.text = f"<![CDATA[{str(row['source']).replace('\n', '<br>')}]]>"
+                source.text = f"<![CDATA[{row['source']}]]>"
 
             elif row['type'] == 'test':
                 test_input = ET.SubElement(current_item, 'test_input')
@@ -63,19 +63,19 @@ def process_file(file_path):
 
             elif row['type'] == 'template' and pd.notna(row['template_language']):
                 template = ET.SubElement(current_item, 'template', language=row['template_language'])
-                template.text = f"<![CDATA[{str(row['template_input']).replace('\n', '<br>')}]]>"
+                template.text = f"<![CDATA[{row['template_input']}]]>"
 
             elif row['type'] == 'solution' and pd.notna(row['template_language']):
                 solution = ET.SubElement(current_item, 'solution', language=row['template_language'])
-                solution.text = f"<![CDATA[{str(row['template_input']).replace('\n', '<br>')}]]>"
+                solution.text = f"<![CDATA[{row['template_input']}]]>"
 
             elif row['type'] == 'prepend' and pd.notna(row['template_language']):
                 prepend = ET.SubElement(current_item, 'prepend', language=row['template_language'])
-                prepend.text = f"<![CDATA[{str(row['template_input']).replace('\n', '<br>')}]]>"
+                prepend.text = f"<![CDATA[{row['template_input']}]]>"
 
             elif row['type'] == 'append' and pd.notna(row['template_language']):
                 append = ET.SubElement(current_item, 'append', language=row['template_language'])
-                append.text = f"<![CDATA[{str(row['template_input']).replace('\n', '<br>')}]]>"
+                append.text = f"<![CDATA[{row['template_input']}]]>"
 
         base_name = os.path.splitext(os.path.basename(file_path))[0]
         output_directory = os.path.dirname(file_path)
