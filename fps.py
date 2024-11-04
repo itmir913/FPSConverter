@@ -2,6 +2,7 @@ import threading
 import pandas as pd
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+import html
 import tkinter as tk
 from tkinter import messagebox
 import tkinterdnd2 as tkdnd2
@@ -85,6 +86,7 @@ def process_file(file_path):
         xml_str = ET.tostring(fps, encoding='utf-8', xml_declaration=True)
         formatted_xml = minidom.parseString(xml_str).toprettyxml(indent="    ")
         formatted_xml = formatted_xml.replace("&lt;![CDATA[", "<![CDATA[").replace("]]&gt;", "]]>")
+        formatted_xml = html.unescape(formatted_xml)  # 모든 HTML 엔티티 복구
 
         with open(output_file_name, "w", encoding="utf-8") as fh:
             fh.write(formatted_xml)
