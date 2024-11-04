@@ -93,7 +93,8 @@ def process_file(file_path):
 
     except Exception as e:
         # 메인 쓰레드에서 오류 메시지를 호출
-        root.after(0, lambda: messagebox.showerror("Error", str(e)))
+        error_message = str(e)
+        root.after(0, lambda: messagebox.showerror("Error", error_message))
 
 
 def process_file_in_thread(file_path):
