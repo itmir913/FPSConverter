@@ -1,3 +1,4 @@
+import threading
 import pandas as pd
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
@@ -88,15 +89,23 @@ def process_file(file_path):
         with open(output_file_name, "w", encoding="utf-8") as fh:
             fh.write(formatted_xml)
 
-        messagebox.showinfo("Success", f"XML file generated successfully:\n{output_file_name}")
+        # 메인 쓰레드에서 메시지 박스를 호출
+        root.after(0, lambda: messagebox.showinfo("Success", f"XML file generated successfully:\n{output_file_name}"))
 
     except Exception as e:
-        messagebox.showerror("Error", str(e))
+        # 메인 쓰레드에서 오류 메시지를 호출
+        root.after(0, lambda: messagebox.showerror("Error", str(e)))
+
+
+def process_file_in_thread(file_path):
+    # 새로운 쓰레드에서 파일을 처리
+    thread = threading.Thread(target=process_file, args=(file_path,))
+    thread.start()
 
 
 def drop(event):
     file_path = event.data
-    process_file(file_path)
+    process_file_in_thread(file_path)  # 파일을 처리하는 함수를 쓰레드로 실행
 
 
 def show_program_info():
