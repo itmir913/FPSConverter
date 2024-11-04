@@ -15,7 +15,7 @@ VERSION = "2024.11.04."
 
 def process_file(file_path):
     try:
-        df = pd.read_excel(file_path)
+        df = pd.read_excel(file_path, dtype=str)
         fps = ET.Element('CSLfps', version="1.2", url="https://github.com/zhblue/freeproblemset/")
         generator = ET.SubElement(fps, 'generator', name="CSL", url="https://github.com/melongist/CSL/tree/master/HUSTOJ/")
 
@@ -28,10 +28,10 @@ def process_file(file_path):
                 title.text = f"<![CDATA[{row['title']}]]>"
 
                 time_limit = ET.SubElement(current_item, 'time_limit', unit="s")
-                time_limit.text = f"<![CDATA[{int(row['time_limit'])}]]>"
+                time_limit.text = f"<![CDATA[{row['time_limit']}]]>"
 
                 memory_limit = ET.SubElement(current_item, 'memory_limit', unit="mb")
-                memory_limit.text = f"<![CDATA[{int(row['memory_limit'])}]]>"
+                memory_limit.text = f"<![CDATA[{row['memory_limit']}]]>"
 
                 description = ET.SubElement(current_item, 'description')
                 description.text = f"<![CDATA[{row['description']}]]>"
