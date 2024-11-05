@@ -38,13 +38,13 @@ def process_file(file_path):
                 memory_limit.text = f"<![CDATA[{row['memory_limit']}]]>"
 
                 description = ET.SubElement(current_item, 'description')
-                description.text = f"<![CDATA[{row['description']}]]>"
+                description.text = f"<![CDATA[{row['description'].replace('\n', '<br>')}]]>"
 
                 input_data = ET.SubElement(current_item, 'input')
-                input_data.text = f"<![CDATA[{row['input']}]]>"
+                input_data.text = f"<![CDATA[{row['input'].replace('\n', '<br>')}]]>"
 
                 output_data = ET.SubElement(current_item, 'output')
-                output_data.text = f"<![CDATA[{row['output']}]]>"
+                output_data.text = f"<![CDATA[{row['output'].replace('\n', '<br>')}]]>"
 
                 sample_input = ET.SubElement(current_item, 'sample_input')
                 sample_input.text = f"<![CDATA[{row['sample_input']}]]>"
@@ -53,7 +53,7 @@ def process_file(file_path):
                 sample_output.text = f"<![CDATA[{row['sample_output']}]]>"
 
                 hint = ET.SubElement(current_item, 'hint')
-                hint.text = f"<![CDATA[{row['hint']}]]>"
+                hint.text = f"<![CDATA[{row['hint'].replace('\n', '<br>')}]]>"
 
                 source = ET.SubElement(current_item, 'source')
                 source.text = f"<![CDATA[{row['source']}]]>"
