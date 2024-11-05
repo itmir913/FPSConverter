@@ -17,10 +17,11 @@ VERSION = "2024.11.04."
 def process_file(file_path):
     try:
         df = pd.read_excel(file_path, dtype=str)
-        df = df.fillna("")
+        df = df.fillna(" ")
 
         fps = ET.Element('CSLfps', version="1.2", url="https://github.com/zhblue/freeproblemset/")
-        generator = ET.SubElement(fps, 'generator', name="CSL", url="https://github.com/melongist/CSL/tree/master/HUSTOJ/")
+        generator = ET.SubElement(fps, 'generator', name="CSL",
+                                  url="https://github.com/melongist/CSL/tree/master/HUSTOJ/")
 
         current_item = None
         for index, row in df.iterrows():
@@ -37,13 +38,13 @@ def process_file(file_path):
                 memory_limit.text = f"<![CDATA[{row['memory_limit']}]]>"
 
                 description = ET.SubElement(current_item, 'description')
-                description.text = f"<![CDATA[{row['description'].fillna(" ").replace('\n', '<br>')}]]>"
+                description.text = f"<![CDATA[{row['description']}]]>"
 
                 input_data = ET.SubElement(current_item, 'input')
-                input_data.text = f"<![CDATA[{row['input'].fillna(" ").replace('\n', '<br>')}]]>"
+                input_data.text = f"<![CDATA[{row['input']}]]>"
 
                 output_data = ET.SubElement(current_item, 'output')
-                output_data.text = f"<![CDATA[{row['output'].fillna(" ").replace('\n', '<br>')}]]>"
+                output_data.text = f"<![CDATA[{row['output']}]]>"
 
                 sample_input = ET.SubElement(current_item, 'sample_input')
                 sample_input.text = f"<![CDATA[{row['sample_input']}]]>"
