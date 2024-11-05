@@ -17,6 +17,8 @@ VERSION = "2024.11.04."
 def process_file(file_path):
     try:
         df = pd.read_excel(file_path, dtype=str)
+        df = df.fillna("")
+
         fps = ET.Element('fps', version="1.2", url="https://github.com/zhblue/freeproblemset/")
         generator = ET.SubElement(fps, 'generator', name="HUSTOJ", url="https://github.com/zhblue/hustoj/")
 

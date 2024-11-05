@@ -17,8 +17,11 @@ VERSION = "2024.11.04."
 def process_file(file_path):
     try:
         df = pd.read_excel(file_path, dtype=str)
+        df = df.fillna("")
+
         fps = ET.Element('CSLfps', version="1.2", url="https://github.com/zhblue/freeproblemset/")
-        generator = ET.SubElement(fps, 'generator', name="CSL", url="https://github.com/melongist/CSL/tree/master/HUSTOJ/")
+        generator = ET.SubElement(fps, 'generator', name="CSL",
+                                  url="https://github.com/melongist/CSL/tree/master/HUSTOJ/")
 
         current_item = None
         for index, row in df.iterrows():
